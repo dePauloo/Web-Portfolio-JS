@@ -8,6 +8,28 @@ navLinks.forEach(link => {
     });
   });
   
+// -------------------- ScrollSpy --------------------
+window.addEventListener("scroll", () => {
+  const sections = document.querySelectorAll("section, div[id]");
+  const scrollPos = window.scrollY + 150; // offset biar pas di tengah layar
+  const navLinks = document.querySelectorAll("nav ul li a");
+
+  sections.forEach((section) => {
+    if (!section.id) return; // skip jika tidak punya id
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === `#${section.id}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+  });
+});
+
 // -------------------- Tab Control --------------------
 var tablinks = document.getElementsByClassName("tab-links");
 var tabcontents = document.getElementsByClassName("tab-contents");
